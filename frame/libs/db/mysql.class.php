@@ -47,7 +47,7 @@ class mysql{
 	 * 查询指定的数据
 	 */
 	function findResult($result,$row = 0,$cloum = 0){
-		return mysql_result($result, $row,$cloum);
+		return mysql_result($result,$row,$cloum);
 	}
 
 	/**
