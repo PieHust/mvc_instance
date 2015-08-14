@@ -26,15 +26,15 @@ class DB{
 	}
 
 	public static function insert($table,$arr){
-		self::$db->insert($table,$arr);
+		return self::$db->insert($table,$arr);
 	}
 
 	public static function update($table,$arr,$where){
-		self::$db->update($table,$arr,$where);
+		return self::$db->update($table,$arr,$where);
 	}
 
 	public static function del($table,$where){
-		self::$db->del($table,$where);
+		return self::$db->del($table,$where);
 	}
 
 }

@@ -22,7 +22,7 @@ class mysql{
 	 * 执行sql语句
 	 */
 	function query($sql){
-		if(!($res = mysql_query($ql))){
+		if(!($res = mysql_query($sql))){
 			$this->err(mysql_error());
 		}else{
 			return $res;
@@ -55,7 +55,7 @@ class mysql{
 	 */
 	function insert($table,$arr){
 		foreach ($arr as $key => $value) {
-			$value = mysql_real_escape_string($value)
+			$value = mysql_real_escape_string($value);
 			$keyArr[] = "`".$key."`";
 			$valArr[] = "'".$value."'";
 		}
@@ -84,5 +84,5 @@ class mysql{
 		$sql = "delete from ".$table." where ".$where;
 		$this->query($sql);
 	}
-
+}
 ?>

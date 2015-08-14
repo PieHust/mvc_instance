@@ -11,11 +11,11 @@
 		private static $config;
 
 		private static function init_db(){
-			DB::init('mysql',self::config['dbconfig']);
+			DB::init('mysql',self::$config['dbconfig']);
 		}
 
 		private static function init_view(){
-			View::init('Smarty',$config['viewconfig']);
+			View::init('Smarty',self::$config['viewconfig']);
 		}
 
 		private static function init_controller(){
