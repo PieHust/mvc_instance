@@ -75,6 +75,7 @@ class mysql{
 		}
 		$keys = join(",",$keyArr);
 		$sql = "update ".$table." set ".$keys." where ".$where;
+		
 		$this->query($sql);
 	}
 	/**

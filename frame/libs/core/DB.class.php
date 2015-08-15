@@ -8,7 +8,7 @@ class DB{
 	}
 
 	public static function query($sql){
-		self::$db->query($sql);
+		return self::$db->query($sql);
 	}
 
 	public static function findAll($sql){

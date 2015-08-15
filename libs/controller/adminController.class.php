@@ -16,7 +16,7 @@ class adminController
 	}
 
 	public function index(){
-
+	
 		$newsobj = M('news');
 		$newsnum = $newsobj->count();
 		View::assign(array('newsnum'=>$newsnum));
@@ -52,6 +52,66 @@ class adminController
 		}
 	}
 
+	public function newsadd(){
+		//
+		if (empty($_POST)) {
+			//没有数据就是显示添加修改的界面
+			//读取信息 get the news
+			if($_GET['id']){
+
+				$data = M('news')->getnewsinfo($_GET['id']);
+
+			}else{
+				$data = array();
+			}
+			View::assign(array('data'=>$data));
+			View::display('admin/newsadd.html');
+		}
+		else{
+			//进行添加
+			$this->newssubmit();
+
+		}
+	}
+
+
+	private function newssubmit(){
+		$onews = M('news');
+		$res = $onews->newssubmit($_POST);
+		echo $res;
+		switch ($res) {
+			case 0:
+				$this->showmessage('操作失败','admin.php?controller=admin&method=newsadd&id='.$_POST['id']);
+				break;
+			case 1:
+				$this->showmessage('添加成功','admin.php?controller=admin&method=newslist');
+				break;
+			case 2:
+				$this->showmessage('修改成功','admin.php?controller=admin&method=newslist');
+				break;
+			default:
+				break;
+			
+		}
+	}
+
+	public function newslist(){
+		$onews = M('news');
+		$data = $onews->findAll_orderby_dateline();
+		View::assign(array('data'=>$data));
+		View::display('admin/newslist.html');
+	}
+
+	public function newsdel(){
+		if(intval($_GET['id'])){
+			$onews = M('news');
+			$data = $onews->delnews($_GET['id']);
+			$this->showmessage('删除成功','admin.php?controller=admin&method=newslist');
+		}
+		
+
+
+	}
 	private function showmessage($info, $url){
 			echo "<script>alert('$info');window.location.href='$url'</script>";
 			exit;
