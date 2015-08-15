@@ -78,7 +78,7 @@ class adminController
 	private function newssubmit(){
 		$onews = M('news');
 		$res = $onews->newssubmit($_POST);
-		echo $res;
+		
 		switch ($res) {
 			case 0:
 				$this->showmessage('操作失败','admin.php?controller=admin&method=newsadd&id='.$_POST['id']);

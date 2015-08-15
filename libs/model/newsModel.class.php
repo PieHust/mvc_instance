@@ -59,4 +59,16 @@
 			$sql = 'select * from '.$this->table.' order by dateline desc';
 			return DB::findAll($sql);
 		}
+
+		public function get_news_list(){
+			$data = $this->findAll_orderby_dateline();
+			foreach ($data as $key => $value) {
+				$pattern='/[\s\t\r\n]/';
+				$data[$key]['content'] = mb_substr(preg_replace($pattern, '', strip_tags($data[$key]['content'])),0,200);
+				// print_r(strip_tags($data[$key]['content']));
+				// $data[$key]['dateline']=date('Y-m-d h:i:s',$data[$key]['dateline']);
+				$data[$key]['dateline']=$data[$key]['dateline'];
+				return $data;
+			}
+		}
 	}
